@@ -9,6 +9,7 @@ export class BalancesController {
     @Get('/:blockchain/:address')
     async getNativeBalance(@Param() getNativeBalanceParams: GetNativeBalanceParamsDTO) {
         console.log({ getNativeBalanceParams });
-        return 'test';
+        const { blockchain, address } = getNativeBalanceParams;
+        return this.balancesService.getNativeBalance(blockchain, address);
     }
 }
