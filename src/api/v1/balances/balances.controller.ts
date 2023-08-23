@@ -6,7 +6,7 @@ import { GetNativeBalanceParamsDTO } from 'src/common/constants/dto/v1';
 export class BalancesController {
     constructor(private readonly balancesService: BalancesService) {}
 
-    @Get('/:chainName/:address')
+    @Get('/:blockchain/:address')
     async getNativeBalance(@Param() getNativeBalanceParams: GetNativeBalanceParamsDTO) {
         console.log({ getNativeBalanceParams });
         return 'test';
