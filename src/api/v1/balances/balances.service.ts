@@ -6,6 +6,6 @@ export class BalancesService {
     constructor(private evmBalanceService: EvmBalanceService) {}
 
     async getNativeBalance(blockchain: string, address: string) {
-        return this.evmBalanceService.getEthBalance(address);
+        return this.evmBalanceService.getBalance(blockchain, address);
     }
 }
