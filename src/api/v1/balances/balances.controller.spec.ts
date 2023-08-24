@@ -11,7 +11,7 @@ describe('BalancesController', () => {
     // TODO: create mocker for this or inside balancesService.getNativeBalance()
     const resolvedNativeBalance: GetNativeBalanceResponseType = {
         address: '0x0089d53f703f7e0843953d48133f74ce247184c2',
-        balance: '1234',
+        balance: '123',
         blockchain: Blockchains.ETH,
         tokenType: TokenTypes.NATIVE,
     };
