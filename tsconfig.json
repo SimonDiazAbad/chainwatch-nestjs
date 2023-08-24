@@ -25,7 +25,7 @@
         "modules/app-config/*"
       ],
       "@constants": [
-        "common/constants/index.ts"
+        "common/constants/index"
       ]
     }
   },
