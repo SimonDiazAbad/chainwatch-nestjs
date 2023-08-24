@@ -1,13 +1,20 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { BalancesController } from './balances.controller';
 import { BalancesService } from './balances.service';
-import { Blockchains } from '@constants';
+import { Blockchains, TokenTypes } from '@constants';
 import { createMock } from '@golevelup/ts-jest';
+import { GetNativeBalanceResponseType } from '@dto/v1';
 
 // TODO: write tests
 describe('BalancesController', () => {
     let balancesController: BalancesController;
-    const resolvedNativeBalance = 123;
+    // TODO: create mocker for this or inside balancesService.getNativeBalance()
+    const resolvedNativeBalance: GetNativeBalanceResponseType = {
+        address: '0x0089d53f703f7e0843953d48133f74ce247184c2',
+        balance: '123',
+        blockchain: Blockchains.ETH,
+        tokenType: TokenTypes.NATIVE,
+    };
 
     beforeEach(async () => {
         const module: TestingModule = await Test.createTestingModule({
@@ -16,7 +23,9 @@ describe('BalancesController', () => {
             .useMocker((token) => {
                 if (token === BalancesService) {
                     return createMock<BalancesService>({
-                        getNativeBalance: jest.fn().mockResolvedValue(resolvedNativeBalance),
+                        getNativeBalance: jest
+                            .fn()
+                            .mockResolvedValue({ ...resolvedNativeBalance, secret: 'password' }),
                     });
                 }
             })
@@ -35,7 +44,6 @@ describe('BalancesController', () => {
             address: '0x0089d53F703f7E0843953D48133f74cE247184c2',
         });
 
-        console.log(balance);
-        expect(balance).toEqual(resolvedNativeBalance);
+        expect(balance.balance).toEqual(resolvedNativeBalance.balance);
     });
 });
