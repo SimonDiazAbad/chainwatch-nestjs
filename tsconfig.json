@@ -24,6 +24,9 @@
       "@config/*": [
         "modules/app-config/*"
       ],
+      "@dto/*": [
+        "common/dto/*"
+      ],
       "@constants": [
         "common/constants/index"
       ]

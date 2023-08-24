@@ -1,12 +1,13 @@
 import { Injectable } from '@nestjs/common';
 import { EvmBalanceService } from '@evm-balance/evm-balance.service';
 import { Blockchains, TokenTypes } from '@constants';
-import { GetNativeBalanceResponseType } from '../../../common/constants/dto/v1';
+import { GetNativeBalanceResponseType } from '@dto/v1';
 
 @Injectable()
 export class BalancesService {
     constructor(private evmBalanceService: EvmBalanceService) {}
 
+    // TODO: check if response DTO be at controller level
     async getNativeBalance(
         blockchain: string,
         address: string,

@@ -1,9 +1,6 @@
 import { Controller, Get, Param } from '@nestjs/common';
 import { BalancesService } from './balances.service';
-import {
-    GetNativeBalanceParamsDTO,
-    GetNativeBalanceResponse,
-} from '../../../common/constants/dto/v1';
+import { GetNativeBalanceParamsDTO, GetNativeBalanceResponse } from '@dto/v1';
 import { ZodSerializerDto } from 'nestjs-zod';
 
 @Controller('balances')
