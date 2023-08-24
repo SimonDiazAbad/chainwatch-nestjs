@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
-import { Blockchains } from 'src/common/constants';
+import { Blockchains } from '@constants';
 
 @Injectable()
 export class AppConfigService {

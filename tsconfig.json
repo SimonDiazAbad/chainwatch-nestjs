@@ -9,13 +9,24 @@
     "target": "ES2021",
     "sourceMap": true,
     "outDir": "./dist",
-    "baseUrl": "./",
+    "baseUrl": "./src",
     "incremental": true,
     "skipLibCheck": true,
     "strictNullChecks": false,
     "noImplicitAny": false,
     "strictBindCallApply": false,
     "forceConsistentCasingInFileNames": false,
-    "noFallthroughCasesInSwitch": false
-  }
+    "noFallthroughCasesInSwitch": false,
+    "paths": {
+      "@evm-balance/*": [
+        "modules/evm-balance/*"
+      ],
+      "@config/*": [
+        "modules/app-config/*"
+      ],
+      "@constants": [
+        "common/constants/index.ts"
+      ]
+    }
+  },
 }

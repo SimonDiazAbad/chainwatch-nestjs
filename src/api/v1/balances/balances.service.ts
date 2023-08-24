@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { EvmBalanceService } from 'src/modules/evm-balance/evm-balance.service';
+import { EvmBalanceService } from '@evm-balance/evm-balance.service';
 
 @Injectable()
 export class BalancesService {

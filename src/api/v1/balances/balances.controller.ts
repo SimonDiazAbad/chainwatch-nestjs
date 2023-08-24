@@ -1,6 +1,6 @@
 import { Controller, Get, Param } from '@nestjs/common';
 import { BalancesService } from './balances.service';
-import { GetNativeBalanceParamsDTO } from 'src/common/constants/dto/v1';
+import { GetNativeBalanceParamsDTO } from '../../../common/constants/dto/v1';
 
 @Controller('balances')
 export class BalancesController {

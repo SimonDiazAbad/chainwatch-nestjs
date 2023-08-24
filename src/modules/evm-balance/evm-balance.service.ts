@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { AppConfigService } from 'src/modules/app-config/app-config.service';
+import { AppConfigService } from '@config/app-config.service';
 import { ethers } from 'ethers';
 
 @Injectable()
