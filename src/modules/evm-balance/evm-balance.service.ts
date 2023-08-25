@@ -14,21 +14,21 @@ export class EvmBalanceService {
     }
 
     getNativeBalance(blockchain: Blockchains, address: string) {
-        const providerUrl = this.providers[blockchain];
-
-        if (!providerUrl) {
-            throw new HttpException(
-                'The requested blockchain provider is not available at the moment.',
-                HttpStatus.NOT_FOUND,
-            );
-        }
-
-        const provider = new ethers.JsonRpcProvider(providerUrl);
+        const provider = this.getProvider(blockchain);
 
         return provider.getBalance(address);
     }
 
     async getERC20Balance(blockchain: Blockchains, erc20token: ERC20Tokens, address: string) {
+        const provider = this.getProvider(blockchain);
+        const tokenAddress = this.getERC20TokenAddress(blockchain, erc20token);
+
+        const contract = new ethers.Contract(tokenAddress, erc20abi, provider);
+
+        return contract.balanceOf(address);
+    }
+
+    getProvider(blockchain: Blockchains) {
         const providerUrl = this.providers[blockchain];
 
         if (!providerUrl) {
@@ -40,11 +40,7 @@ export class EvmBalanceService {
 
         const provider = new ethers.JsonRpcProvider(providerUrl);
 
-        const tokenAddress = this.getERC20TokenAddress(blockchain, erc20token);
-
-        const contract = new ethers.Contract(tokenAddress, erc20abi, provider);
-
-        return contract.balanceOf(address);
+        return provider;
     }
 
     getERC20TokenAddress(blockchain: Blockchains, erc20token: ERC20Tokens) {
