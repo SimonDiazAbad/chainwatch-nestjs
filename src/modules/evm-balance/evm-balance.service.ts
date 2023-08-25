@@ -5,6 +5,7 @@ import { ethers } from 'ethers';
 @Injectable()
 export class EvmBalanceService {
     readonly providers;
+
     constructor(private appConfigService: AppConfigService) {
         this.providers = this.appConfigService.providers;
     }
@@ -14,8 +15,8 @@ export class EvmBalanceService {
 
         if (!providerUrl) {
             throw new HttpException(
-                `Provider for ${blockchain} not defined`,
-                HttpStatus.INTERNAL_SERVER_ERROR,
+                'The requested blockchain provider is not available at the moment.',
+                HttpStatus.NOT_FOUND,
             );
         }
 
