@@ -16,7 +16,7 @@ export class BalancesService {
         return {
             address: address,
             balance: balance.toString(),
-            blockchain: Blockchains.ETH,
+            blockchain: blockchain,
             tokenType: TokenTypes.NATIVE,
         };
     }
@@ -31,8 +31,8 @@ export class BalancesService {
         return {
             address: address,
             balance: balance.toString(),
-            blockchain: Blockchains.ETH,
-            tokenType: TokenTypes.NATIVE,
+            blockchain: blockchain,
+            tokenType: TokenTypes.ERC20,
             erc20token: erc20token,
         };
     }

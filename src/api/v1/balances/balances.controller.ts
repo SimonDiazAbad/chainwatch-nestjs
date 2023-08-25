@@ -1,6 +1,11 @@
 import { Controller, Get, Param } from '@nestjs/common';
 import { BalancesService } from './balances.service';
-import { GetNativeBalanceParamsDTO, GetNativeBalanceResponse } from '@dto/v1';
+import {
+    GetNativeBalanceParamsDTO,
+    GetERC20BalanceParamsDTO,
+    GetNativeBalanceResponse,
+    GetERC20BalanceResponse,
+} from '@dto/v1';
 import { ZodSerializerDto } from 'nestjs-zod';
 
 @Controller('balances')
@@ -16,7 +21,8 @@ export class BalancesController {
     }
 
     @Get('/:blockchain/:erc20token/:address')
-    async getERC20Balance(@Param() getERC20BalanceParams) {
+    @ZodSerializerDto(GetERC20BalanceResponse)
+    async getERC20Balance(@Param() getERC20BalanceParams: GetERC20BalanceParamsDTO) {
         const { blockchain, erc20token, address } = getERC20BalanceParams;
         return this.balancesService.getERC20Balance(blockchain, erc20token, address);
     }
