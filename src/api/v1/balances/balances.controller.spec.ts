@@ -8,6 +8,7 @@ import { GetNativeBalanceResponseType } from '@dto/v1';
 // TODO: write tests
 describe('BalancesController', () => {
     let balancesController: BalancesController;
+    let balancesService: BalancesService;
     // TODO: create mocker for this or inside balancesService.getNativeBalance()
     const resolvedNativeBalance: GetNativeBalanceResponseType = {
         address: '0x0089d53f703f7e0843953d48133f74ce247184c2',
@@ -32,6 +33,7 @@ describe('BalancesController', () => {
             .compile();
 
         balancesController = module.get<BalancesController>(BalancesController);
+        balancesService = module.get<BalancesService>(BalancesService);
     });
 
     it('should be defined', () => {
@@ -45,5 +47,14 @@ describe('BalancesController', () => {
         });
 
         expect(balance.balance).toEqual(resolvedNativeBalance.balance);
+    });
+
+    it('should call balancesServices.getNativeToken()', async () => {
+        await balancesController.getNativeBalance({
+            blockchain: Blockchains.ETH,
+            address: '0x0089d53F703f7E0843953D48133f74cE247184c2',
+        });
+
+        expect(balancesService.getNativeBalance).toHaveBeenCalled();
     });
 });
