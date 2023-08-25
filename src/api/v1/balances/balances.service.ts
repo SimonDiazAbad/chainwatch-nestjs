@@ -9,7 +9,7 @@ export class BalancesService {
 
     // TODO: check if response DTO be at controller level
     async getNativeBalance(
-        blockchain: string,
+        blockchain: Blockchains,
         address: string,
     ): Promise<GetNativeBalanceResponseType> {
         const balance = await this.evmBalanceService.getNativeBalance(blockchain, address);

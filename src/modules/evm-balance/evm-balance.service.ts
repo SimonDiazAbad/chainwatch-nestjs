@@ -1,6 +1,7 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { AppConfigService } from '@config/app-config.service';
 import { ethers } from 'ethers';
+import { Blockchains } from '@constants';
 
 @Injectable()
 export class EvmBalanceService {
@@ -10,7 +11,7 @@ export class EvmBalanceService {
         this.providers = this.appConfigService.providers;
     }
 
-    getNativeBalance(blockchain: string, address: string) {
+    getNativeBalance(blockchain: Blockchains, address: string) {
         const providerUrl = this.providers[blockchain];
 
         if (!providerUrl) {
@@ -24,4 +25,6 @@ export class EvmBalanceService {
 
         return provider.getBalance(address);
     }
+
+    getERC20Balance() {}
 }
