@@ -14,4 +14,10 @@ export class BalancesController {
         const { blockchain, address } = getNativeBalanceParams;
         return this.balancesService.getNativeBalance(blockchain, address);
     }
+
+    @Get('/:blockchain/:erc20token/:address')
+    async getERC20Balance(@Param() getERC20BalanceParams) {
+        const { blockchain, erc20token, address } = getERC20BalanceParams;
+        return this.balancesService.getERC20Balance(blockchain, erc20token, address);
+    }
 }

@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { EvmBalanceService } from '@evm-balance/evm-balance.service';
-import { Blockchains, TokenTypes } from '@constants';
+import { Blockchains, ERC20Tokens, TokenTypes } from '@constants';
 import { GetNativeBalanceResponseType } from '@dto/v1';
 
 @Injectable()
@@ -18,6 +18,22 @@ export class BalancesService {
             balance: balance.toString(),
             blockchain: Blockchains.ETH,
             tokenType: TokenTypes.NATIVE,
+        };
+    }
+
+    async getERC20Balance(blockchain: Blockchains, erc20token: ERC20Tokens, address: string) {
+        const balance = await this.evmBalanceService.getERC20Balance(
+            blockchain,
+            erc20token,
+            address,
+        );
+
+        return {
+            address: address,
+            balance: balance.toString(),
+            blockchain: Blockchains.ETH,
+            tokenType: TokenTypes.NATIVE,
+            erc20token: erc20token,
         };
     }
 }
