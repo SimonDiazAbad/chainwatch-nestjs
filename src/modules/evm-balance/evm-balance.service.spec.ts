@@ -66,4 +66,5 @@ describe('EvmBalanceService', () => {
         expect(balance.toString()).toEqual(mockBalance.toString());
     });
     it.todo('should throw exception on undefined provider of getERC20Balance');
+    it.todo('should throw exception on undefined token contract address of getERC20Balance');
 });
