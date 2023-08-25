@@ -6,9 +6,11 @@ import erc20abi from './abi/erc20.json';
 @Injectable()
 export class EvmBalanceService {
     readonly providers;
+    readonly tokenAddress;
 
     constructor(private appConfigService: AppConfigService) {
         this.providers = this.appConfigService.providers;
+        this.tokenAddress = this.appConfigService.erc20TokenAddress;
     }
 
     getNativeBalance(blockchain: Blockchains, address: string) {
@@ -38,12 +40,23 @@ export class EvmBalanceService {
 
         const provider = new ethers.JsonRpcProvider(providerUrl);
 
-        const contract = new ethers.Contract(
-            '0xdAC17F958D2ee523a2206206994597C13D831ec7',
-            erc20abi,
-            provider,
-        );
+        const tokenAddress = this.getERC20TokenAddress(blockchain, erc20token);
+
+        const contract = new ethers.Contract(tokenAddress, erc20abi, provider);
 
         return contract.balanceOf(address);
+    }
+
+    getERC20TokenAddress(blockchain: Blockchains, erc20token: ERC20Tokens) {
+        const tokenAddress = this.tokenAddress[blockchain][erc20token];
+
+        if (!tokenAddress) {
+            throw new HttpException(
+                'The requested ERC20 token is not available at the moment.',
+                HttpStatus.NOT_FOUND,
+            );
+        }
+
+        return tokenAddress;
     }
 }
