@@ -4,16 +4,12 @@ A NestJS service for tracking and retrieving balances of Ethereum, ERC20 tokens,
 
 ## Features Checklist
 
-- [ ] **Ethereum Balance Tracking**
-  - [ ] Fetch and display ETH balance for a given address.
+- [X] **Native Token Balance Tracking on EVM chains**
+  - [X] Fetch and display native token balance for a given address.
   
-- [ ] **ERC20 Token Balance on Ethereum**
+- [ ] **ERC20 Token Balance on EVM-compatible Chains**
   - [ ] Fetch and display ERC20 token balances for a given address.
-
-- [ ] **Support for EVM Compatible Chains**
-  - [ ] Polygon (MATIC) balance tracking.
-  - [ ] (Add other EVM chains here when expanding)
-
+     
 - [ ] **Solana Balance Tracking**
   - [ ] Fetch and display SOL balance and SPL tokens for a given address.
 
