@@ -39,7 +39,7 @@ describe('EvmBalanceService', () => {
         expect(balance.toString()).toEqual(mockBalance.toString());
     });
 
-    it('should throw exception on undefined provider of ', async () => {
+    it('should throw exception on undefined provider of getNativeBalance()', async () => {
         delete appConfigService.providers[Blockchains.MATIC];
 
         expect(() =>
@@ -49,4 +49,7 @@ describe('EvmBalanceService', () => {
             ),
         ).toThrowError(HttpException);
     });
+
+    it.todo('should get ERC20 balance', async () => {});
+    it.todo('should throw exception on undefined provider of getERC20Balance', async () => {});
 });
