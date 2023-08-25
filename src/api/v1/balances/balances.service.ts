@@ -12,7 +12,7 @@ export class BalancesService {
         blockchain: string,
         address: string,
     ): Promise<GetNativeBalanceResponseType> {
-        const balance = await this.evmBalanceService.getBalance(blockchain, address);
+        const balance = await this.evmBalanceService.getNativeBalance(blockchain, address);
         return {
             address: address,
             balance: balance.toString(),

@@ -10,7 +10,7 @@ export class EvmBalanceService {
         this.providers = this.appConfigService.providers;
     }
 
-    getBalance(blockchain: string, address: string) {
+    getNativeBalance(blockchain: string, address: string) {
         const providerUrl = this.providers[blockchain];
 
         if (!providerUrl) {
