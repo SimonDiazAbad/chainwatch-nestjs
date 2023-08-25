@@ -7,6 +7,7 @@ const config: Config.InitialOptions = {
         '^@evm-balance/(.*)$': '<rootDir>/modules/evm-balance/$1',
         '^@config/(.*)$': '<rootDir>/modules/app-config/$1',
         '^@dto/(.*)$': '<rootDir>/common/dto/$1',
+        '^@tests/(.*)$': '<rootDir>/tests/$1',
         '^@constants$': '<rootDir>/common/constants/index.ts',
     },
     moduleFileExtensions: ['js', 'json', 'ts'],
