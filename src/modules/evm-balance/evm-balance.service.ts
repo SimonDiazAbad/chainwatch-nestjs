@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { AppConfigService } from '@config/app-config.service';
 import { ethers } from 'ethers';
 
@@ -10,8 +10,16 @@ export class EvmBalanceService {
     }
 
     getBalance(blockchain: string, address: string) {
-        // const provider = new ethers.providers.JsonRpcProvider(url);
-        const provider = new ethers.JsonRpcProvider(this.providers[blockchain]);
+        const providerUrl = this.providers[blockchain];
+
+        if (!providerUrl) {
+            throw new HttpException(
+                `Provider for ${blockchain} not defined`,
+                HttpStatus.INTERNAL_SERVER_ERROR,
+            );
+        }
+
+        const provider = new ethers.JsonRpcProvider(providerUrl);
 
         return provider.getBalance(address);
     }
