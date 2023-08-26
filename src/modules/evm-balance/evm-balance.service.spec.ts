@@ -65,6 +65,31 @@ describe('EvmBalanceService', () => {
 
         expect(balance.toString()).toEqual(mockBalance.toString());
     });
-    it.todo('should throw exception on undefined provider of getERC20Balance');
-    it.todo('should throw exception on undefined token contract address of getERC20Balance');
+    it('should throw exception on undefined provider of getERC20Balance', async () => {
+        delete appConfigService.providers[Blockchains.ETH];
+        appConfigService.erc20TokenAddress[Blockchains.ETH] = {};
+        appConfigService.erc20TokenAddress[Blockchains.ETH][ERC20Tokens.USDT] =
+            '0xdAC17F958D2ee523a2206206994597C13D831ec7';
+
+        expect(() =>
+            evmBalanceService.getERC20Balance(
+                Blockchains.ETH,
+                ERC20Tokens.USDT,
+                '0x0089d53f703f7e0843953d48133f74ce247184c2',
+            ),
+        ).toThrowError(HttpException);
+    });
+    it('should throw exception on undefined token contract address of getERC20Balance', async () => {
+        appConfigService.providers[Blockchains.ETH] = 'https://eth.llamarpc.com';
+        appConfigService.erc20TokenAddress[Blockchains.ETH] = {};
+        delete appConfigService.erc20TokenAddress[Blockchains.ETH][ERC20Tokens.USDT];
+
+        expect(() =>
+            evmBalanceService.getERC20Balance(
+                Blockchains.ETH,
+                ERC20Tokens.USDT,
+                '0x0089d53f703f7e0843953d48133f74ce247184c2',
+            ),
+        ).toThrow(HttpException);
+    });
 });

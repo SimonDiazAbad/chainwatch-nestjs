@@ -19,7 +19,7 @@ export class EvmBalanceService {
         return provider.getBalance(address);
     }
 
-    async getERC20Balance(blockchain: Blockchains, erc20token: ERC20Tokens, address: string) {
+    getERC20Balance(blockchain: Blockchains, erc20token: ERC20Tokens, address: string) {
         const provider = this.getProvider(blockchain);
         const tokenAddress = this.getERC20TokenAddress(blockchain, erc20token);
 
